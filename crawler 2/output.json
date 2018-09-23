@@ -1,0 +1,51 @@
+[
+{"url": "http://www.milliyet.com.tr/", "word": "2\u00b0C              "},
+{"url": "http://www.milliyet.com.tr/", "word": "\u015fimdi"},
+{"url": "http://www.milliyet.com.tr/", "word": "Hisseli Tapu Ay\u0131rma \u0130\u015flemi"},
+{"url": "http://www.milliyet.com.tr/", "word": "TC\u2019li Olmak Bir Ayr\u0131cal\u0131kt\u0131r"},
+{"url": "http://www.milliyet.com.tr/", "word": "Yaln\u0131zca 200 TL Harcayarak Banyonuzu Ba\u015ftan Yarat\u0131n"},
+{"url": "http://www.milliyet.com.tr/", "word": " \u00d6FKEY\u0130 KONTROL ETMEN\u0130N YOLU \u00d6fke, kar\u015f\u0131lanmayan beklentilere, iste..."},
+{"url": "http://www.milliyet.com.tr/", "word": "Bug\u00fcn ne yap\u0131labilir ? Olduk\u00e7a ilgin\u00e7 ve yarat\u0131c\u0131 olabilece\u011fimiz bir g\u00fcndeyiz."},
+{"url": "http://www.milliyet.com.tr/", "word": "ATV ekran\u0131nda yay\u0131nlanan sevilen dizi E\u015fk\u0131ya D\u00fcnyaya H\u00fck\u00fcmdar Olmaz 54. yeni b\u00f6l\u00fcm fragman\u0131 hen\u00fcz yay\u0131nlanmad\u0131."},
+{"url": "http://www.milliyet.com.tr/", "word": "\u00c7ar\u015famba ak\u015fam\u0131 ekrana gelen fenomen dizi Poyraz Karayel d\u00fcn ak\u015fam ekrana gelen son b\u00f6l\u00fcm ile"}
+][
+{"url": "http://www.milliyet.com.tr/", "word": "2\u00b0C              "},
+{"url": "http://www.milliyet.com.tr/", "word": "\u015fimdi"},
+{"url": "http://www.milliyet.com.tr/", "word": "Hisseli Tapu Ay\u0131rma \u0130\u015flemi"},
+{"url": "http://www.milliyet.com.tr/", "word": "TC\u2019li Olmak Bir Ayr\u0131cal\u0131kt\u0131r"},
+{"url": "http://www.milliyet.com.tr/", "word": "Yaln\u0131zca 200 TL Harcayarak Banyonuzu Ba\u015ftan Yarat\u0131n"},
+{"url": "http://www.milliyet.com.tr/", "word": " NOT: Bu yaz\u0131n\u0131n bir k\u0131sm\u0131 daha geni\u015f bir konuyu kapsamakta olan bir yaz\u0131dan a..."},
+{"url": "http://www.milliyet.com.tr/", "word": "Bug\u00fcn ne yap\u0131labilir ? Olduk\u00e7a ilgin\u00e7 ve yarat\u0131c\u0131 olabilece\u011fimiz bir g\u00fcndeyiz."},
+{"url": "http://www.milliyet.com.tr/", "word": "ATV ekran\u0131nda yay\u0131nlanan sevilen dizi E\u015fk\u0131ya D\u00fcnyaya H\u00fck\u00fcmdar Olmaz 54. yeni b\u00f6l\u00fcm fragman\u0131 hen\u00fcz yay\u0131nlanmad\u0131."},
+{"url": "http://www.milliyet.com.tr/", "word": "\u00c7ar\u015famba ak\u015fam\u0131 ekrana gelen fenomen dizi Poyraz Karayel d\u00fcn ak\u015fam ekrana gelen son b\u00f6l\u00fcm ile"}
+]
+
+
+ if response.xpath('//h1//text()').extract():
+            tag = response.xpath('//h1//text()').extract()
+        elif response.xpath('//h2//text()').extract():
+            tag = response.xpath('//h2//text()').extract()
+        elif response.xpath('//h3//text()').extract():
+            tag = response.xpath('//h3//text()').extract()
+        elif response.xpath('//h4//text()').extract():
+            tag = response.xpath('//h4//text()').extract()
+        elif response.xpath('//h5//text()').extract():
+            tag = response.xpath('//h5//text()').extract()
+        elif response.xpath('//h6//text()').extract():
+            tag = response.xpath('//h6//text()').extract()
+
+        if response.xpath('//div[@class="date"]//text()').extract():
+            date = response.xpath('//div[@class="date"]//text()').extract()
+
+        parsed = response.xpath('//div/p//text()').extract()
+     #   links  = ''.join(response.xpath('//a/@href').extract())
+      #  for link in links:
+       #     yield Request(link,callback=self.parse)
+        #parsed.encode('utf-8')
+        for word in ''.join(parsed).split():
+            yield {
+                'word' : word,
+                'url' : response.url,
+                'date' : date,
+                'tag' : tag
+            }
